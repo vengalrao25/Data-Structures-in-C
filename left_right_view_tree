@@ -1,0 +1,106 @@
+
+#include <stdio.h>
+#include<malloc.h>
+struct node 
+{
+    int data ;
+    struct node * left;
+    struct node * right;
+};
+
+struct node * createNode( int val)
+{
+    struct node * l = malloc(sizeof(struct node ));
+    l->data = val ;
+    l->left =NULL;
+    l->right =NULL;
+    return l;
+}
+
+void prin(struct node *head)
+{
+    if (head!=NULL)
+    {
+        printf("%d " ,head->data);
+        prin(head->left);
+        
+        prin(head->right);
+    }
+    
+}
+
+
+static int maxlevel = -1; 
+
+
+
+void  leftview(struct node *head , int level )
+{
+    if(head==NULL)
+    {
+        return;
+    }
+    if( maxlevel<level )
+    {
+        maxlevel  =level ; 
+        printf("%d ",head->data);
+    }
+    leftview(head->left, level+1);
+    leftview(head->right ,level+1);
+}
+static int maxlevel1 = -1 ; 
+
+void rightview(struct node *head , int level)
+{
+    if (head==NULL)
+    {
+        return ;
+    }
+    if (maxlevel1<level)
+    {
+        printf("%d ",head->data);
+        maxlevel1= level ;
+    }
+    rightview(head->right , level+1);
+    rightview(head->left , level+1);
+    
+}
+
+int main(){
+     
+    // Constructing the root node - Using Function (Recommended)
+    struct node *p = createNode(5);
+    struct node *p1 = createNode(3);
+    struct node *p2 = createNode(6);
+    struct node *p3 = createNode(1);
+    struct node *p4 = createNode(4);
+    // Finally The tree looks like this:
+    //      5
+    //     / \
+    //    3   6
+    //   / \
+    //  1   4  
+
+   
+    p->left = p1;
+    p->right = p2;
+    p1->left = p3;
+    p1->right = p4;
+    
+    
+    prin(p);
+printf("\n");
+
+
+leftview(p,0);
+printf("\n");
+
+
+rightview(p,0);
+printf("\n");
+
+
+
+
+return  0 ;
+}
