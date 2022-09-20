@@ -1,11 +1,8 @@
 
 #include <stdio.h>
-
-int main()
+void bubble(int arr[] , int size)
 {
-    int arr[] = {16,10,12,41,623,17} , min_index ,temp ;
-    int size  = sizeof(arr)/sizeof(arr[0]);
-    
+    int temp , min_index ; 
     for(int i=0; i<size-1 ; i++)
     {
         int min_index= i ;
@@ -22,10 +19,25 @@ int main()
         arr[min_index] =arr[i];
         arr[i]  = temp ; 
     }
+}
 
+
+void prin(int arr[] , int size)
+{
     for(int i = 0 ; i<size ; i++)
     {
         printf("%d ",arr[i]);
     }
+}
+
+
+int main()
+{
+    int arr[] = {16,10,12,41,623,17}  ;
+    int size  = sizeof(arr)/sizeof(arr[0]);
+    
+    bubble(arr , size);
+
+    prin(arr,size);
     return 0;
 }
