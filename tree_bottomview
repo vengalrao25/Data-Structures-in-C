@@ -1,0 +1,82 @@
+
+#include <stdio.h>
+#include<malloc.h>
+struct node 
+{
+    int data ;
+    struct node * left;
+    struct node * right;
+};
+
+
+
+struct node * createNode( int val)
+{
+    struct node * l = malloc(sizeof(struct node ));
+    l->data = val ;
+    l->left =NULL;
+    l->right =NULL;
+    return l;
+}
+
+int check(struct node *t)
+{
+    if (t->left==NULL && t->right==NULL)
+    {
+        return 1 ; 
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+void bottomview(struct node  * ptr )
+{
+    if (ptr==NULL)
+    {
+        return  ;
+    }
+    
+    bottomview(ptr->left);
+    if (check(ptr))
+    {
+        printf("%d ",ptr->data);
+    }
+    bottomview(ptr->right);
+    
+}
+
+
+
+
+int main(){
+     
+    // Constructing the root node - Using Function (Recommended)
+    struct node *p = createNode(5);
+    struct node *p1 = createNode(3);
+    struct node *p2 = createNode(6);
+    struct node *p3 = createNode(1);
+    struct node *p4 = createNode(4);
+
+    // Finally The tree looks like this:
+    //      5
+    //     / \
+    //    3   6
+    //   / \
+    //  1   4  
+
+   
+    p->left = p1;
+    p->right = p2;
+    p1->left = p3;
+    p1->right = p4;
+    
+    
+   
+
+
+bottomview(p);
+return  0 ;
+}
